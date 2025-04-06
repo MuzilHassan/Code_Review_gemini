@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import Editor from "react-simple-code-editor";
 import axios from "axios";
 import Markdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/github-dark.css";
 function App() {
   const [code, setCode] = useState(`function add(a, b) {\n  return a + b;\n}`);
   const [review, setReview] = useState("");
@@ -51,14 +53,14 @@ function App() {
         {/* </code>
         </pre> */}
         <button
-          className=" absolute bottom-2 right-0 border border-black text-white shadow-md bg-black"
+          className=" absolute bottom-2 right-0 border border-black text-white shadow-md bg-black p-y-2 px-3 rounded-sm -translate-x-4 "
           onClick={getReview}
         >
           Review
         </button>
       </div>
-      <div className=" w-full rounded-md shadow-xl p-1 ">
-        <Markdown>{review}</Markdown>
+      <div className=" w-full rounded-md shadow-xl p-1 overflow-auto bg-gray-600 text-white ">
+        <Markdown rehypePlugins={[rehypeHighlight]}>{review}</Markdown>
       </div>
     </main>
   );
